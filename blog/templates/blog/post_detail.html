@@ -12,6 +12,7 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'blog/bootstrap/bootstrap.min.css' %}" rel="stylesheet" media="screen"/>
+        <script src="https://kit.fontawesome.com/50cac81b39.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -59,6 +60,22 @@
                     <hr />
                     <!-- Post content-->
                     <p>{{ post.content }}</p>
+
+                    {% if post.file_upload %}
+                        <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button">Download:
+
+                            {% if post.get_file_ext == 'csv' %}
+                                <i class="fas fa-file-csv"></i>
+                            {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                                <i class="fas fa-file-excel"></i>
+                            {% elif post.get_file_ext == 'doc' or post.get_file_ext == 'docx' %}
+                                <i class="fas fa-file-word"></i>
+                            {% else %}
+                                <i class="fas fa-file"></i>
+                            {% endif %}
+                            {{ post.get_file_name }}
+                        </a>
+                    {% endif %}
                     <hr />
                     <!-- Comments form-->
                     <div class="card my-4">
